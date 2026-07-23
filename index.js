@@ -1,5 +1,5 @@
 import Razorpay from 'razorpay';
-import app from '../server/app.js';
+import app from './app.js';
 import connectionTodb from "./config/db.js";
 import { createServer } from "http";
 import { Server } from "socket.io";
@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 5001;
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: ['http://localhost:5173','http://192.168.0.116:5173'],
+    origin: [process.env.FRONTEND_URL, 'http://localhost:5173', 'http://192.168.0.116:5173'],
     credentials: true
   }
 });
