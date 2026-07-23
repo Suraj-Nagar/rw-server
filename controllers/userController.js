@@ -6,6 +6,7 @@ const cookieOptions = {
     secure: process.env.NODE_ENV === 'production' ? true : false,
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     httpOnly: true,
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
 };
 export const register = async (req, res, next) => {
     const { fullName, email, password, role } = req.body;
@@ -99,6 +100,7 @@ export const logout = async (_req, res, _next) => {
         secure: process.env.NODE_ENV === 'production' ? true : false,
         maxAge: 0,
         httpOnly: true,
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     });
     res.status(200).json({
         success: true,
